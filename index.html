@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fake & Real News Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span class="logo-icon">📰</span>
+      <span>NewsVerify<span class="logo-ai">AI</span></span>
+    </div>
+    <p class="tagline">Powered by Machine Learning · Trained on your dataset</p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Detect Fake or Real News</h2>
+      <p class="sub">Paste a news headline and/or full article text below.</p>
+
+      <label for="titleInput">📌 News Title (optional)</label>
+      <input type="text" id="titleInput" placeholder="e.g. Kerry to go to Paris in gesture of sympathy" />
+
+      <label for="textInput">📝 Article Text</label>
+      <textarea id="textInput" rows="9"
+        placeholder="Paste the full article body here..."></textarea>
+
+      <div class="examples-label">⚡ Quick Examples from Dataset:</div>
+      <div class="examples-row">
+        <button class="ex-btn real"  onclick="loadExample('real1')">✅ Real Example 1</button>
+        <button class="ex-btn real"  onclick="loadExample('real2')">✅ Real Example 2</button>
+        <button class="ex-btn fake"  onclick="loadExample('fake1')">❌ Fake Example 1</button>
+        <button class="ex-btn fake"  onclick="loadExample('fake2')">❌ Fake Example 2</button>
+      </div>
+
+      <button class="predict-btn" onclick="predict()">
+        <span id="btnText">🔍 Analyze News</span>
+      </button>
+
+      <div id="result" class="result hidden">
+        <div id="resultBadge" class="badge"></div>
+        <div id="resultMsg"  class="result-msg"></div>
+        <div class="bars">
+          <div class="bar-row">
+            <span class="bar-label">🟢 Real</span>
+            <div class="bar-track">
+              <div id="barReal" class="bar-fill real-fill"></div>
+            </div>
+            <span id="pctReal" class="bar-pct"></span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">🔴 Fake</span>
+            <div class="bar-track">
+              <div id="barFake" class="bar-fill fake-fill"></div>
+            </div>
+            <span id="pctFake" class="bar-pct"></span>
+          </div>
+        </div>
+      </div>
+
+      <div id="errBox" class="err-box hidden"></div>
+    </div>
+  </main>
+
+  <footer>Built with Flask · Scikit-learn · TF-IDF · Logistic Regression</footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
